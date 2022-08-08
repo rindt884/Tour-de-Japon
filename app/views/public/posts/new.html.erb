@@ -1,7 +1,8 @@
 <%= form_with model: @post, url: public_posts_path, method: :post, local: true  do |f| %>
 
-  <%= f.file_field :image, accept: "image/*" %><br>
- 
+  <%= f.label :image %>
+  <%= f.file_field :images, multiple: true %>
+
   <%= f.label :name, "地域" %>
   <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name,{include_blank: "---"} ) %><br>
   
