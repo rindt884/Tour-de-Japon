@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   }
 
   namespace :public do
-    resource :customers,only:[:show, :edit]
+    resources :customers,only:[:show, :edit, :update]
     resources :posts,only:[:new, :index, :show, :edit, :create, :destroy, :update]
   end
 

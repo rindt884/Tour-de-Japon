@@ -1,5 +1,7 @@
 <div>
   <% @posts.each do |p| %>
+    <%= image_tag p.customer.get_profile_image(50,50) %>
+    <%= p.customer.name %><br>
     <%= p.prefecture.name %><br>
     <%= p.title %><br>
     <% if (@now - p.created_at) <= 60 * 60 %>
