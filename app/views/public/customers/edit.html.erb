@@ -1,0 +1,17 @@
+<%= form_with model: [:public, @customer], local:true do |f| %>
+  <div>
+    <%= f.label :ユーザーネーム %>
+    <%= f.text_field :name %>
+  </div>
+ <div>
+    <%= f.label :プロフィール画像 %>
+    <%= f.file_field :profile_image %>
+  </div>
+  <div>
+    <%= f.label :自己紹介 %>
+    <%= f.text_area :introduction %>
+  </div>
+  <div>
+    <%= f.submit "更新" %>
+  </div>
+<% end %>

@@ -1,0 +1,4 @@
+<%= @customer.name %>
+<%= image_tag @customer.get_profile_image(100,100) %>
+<%= simple_format(@customer.introduction) %>
+<%= link_to "プロフィール編集", edit_public_customer_path(@customer.id) %>
