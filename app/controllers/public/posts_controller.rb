@@ -6,6 +6,8 @@ class Public::PostsController < ApplicationController
     
     def index
       @posts = Post.all
+      @today = Date.today #今日の日付を取得
+      @now = Time.now     #現在時刻を取得
     end
     
     def show
@@ -31,7 +33,7 @@ class Public::PostsController < ApplicationController
     private
     
     def post_params
-      params.require(:post).permit(:customer_id, :title, :body, :rideday, :runtime, :mileage, image: [])
+      params.require(:post).permit(:customer_id, :title, :body, :rideday, :runtime, :mileage, :prefecture_id, images: [])
     end
     
 end
