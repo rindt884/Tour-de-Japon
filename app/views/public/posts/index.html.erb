@@ -11,7 +11,7 @@
       <% end %>
     <% end %><br>
     
-    <%= render "public/favorites/favorite", post: p %><br>
+    <div id="favorite_btn_<%= p.id %>"><%= render "public/favorites/favorite", post: p %></div><br>
   
     <%= p.prefecture.name %><br>
     

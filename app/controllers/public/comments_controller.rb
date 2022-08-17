@@ -12,5 +12,11 @@ class Public::CommentsController < ApplicationController
     Comment.find(params[:id]).destroy
     redirect_to public_post_path(params[:post_id])
   end
+  
+  private
+
+  def comment_params
+    params.require(:comment).permit(:comment, :post_id)
+  end
 
 end

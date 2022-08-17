@@ -13,6 +13,7 @@ class Public::PostsController < ApplicationController
     def show
       @post = Post.find(params[:id])
       @customer = current_customer
+      @comment = Comment.new
     end
     
     def edit
