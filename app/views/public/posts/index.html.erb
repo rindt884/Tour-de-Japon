@@ -1,9 +1,22 @@
 <div>
   <% @posts.each do |p| %>
+  
     <%= image_tag p.customer.get_profile_image(50,50) %>
-    <%= p.customer.name %><br>
+    
+    <%= link_to p.customer.name, public_customer_path(p.customer.id) %><br>
+  
+    <% if p.images.attached? %>
+      <% p.images.each do |image| %>
+        <%= image_tag image.variant(resize: '300x300') %>
+      <% end %>
+    <% end %><br>
+    
+    <%= render "public/favorites/favorite", post: p %><br>
+  
     <%= p.prefecture.name %><br>
-    <%= p.title %><br>
+    
+    <%= link_to p.title, public_post_path(p.id) %><br>
+    
     <% if (@now - p.created_at) <= 60 * 60 %>
       <%=((@now - p.created_at) / 60).to_i.to_s + "分前" %>
     <% elsif (@now - p.created_at) <= 60 * 60 * 24 %>
@@ -13,5 +26,6 @@
     <% else %>
       <%= p.created_at.strftime('%Y-%m-%d') %> 
     <% end %><br>
+    
   <% end %>
 </div>
