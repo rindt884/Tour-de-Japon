@@ -60,4 +60,6 @@ gem 'active_hash'
 
 gem 'devise'
 
+# gem 'jquery-rails'
+
 gem "net-smtp"
