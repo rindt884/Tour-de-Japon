@@ -7,6 +7,8 @@ class Post < ApplicationRecord
   belongs_to :customer
   has_many :comments, dependent: :destroy
   
+  validates :images, :prefecture_id, :title, :body, :rideday, :mileage, :runtime, presence: true
+  
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end

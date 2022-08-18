@@ -12,5 +12,9 @@
 <%= @post.rideday %><br>
 <%= @post.mileage %>km<br>
 <%= @post.runtime.strftime("%H:%M") %><br>
-<%= render "public/comments/comments", post: @post %>
-<!--%= render "public/comments/form", post: @post, comment: @comment %>-->
+<div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
+<div class="new-comment"><%= render "public/comments/form", post: @post, comment: @comment %></div>
+
+<% if @post.customer_id == current_customer.id %>
+  <td><%= link_to '編集', edit_public_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></td>
+<% end %>

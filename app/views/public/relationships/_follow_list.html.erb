@@ -14,6 +14,15 @@
             <td><%= link_to c.name, public_customer_path(c) %></td>
             <td>フォロー数: <%= c.followings.count %></td>
             <td>フォロワー数: <%= c.followers.count %></td>
+            <td>
+              <% if c != current_customer %>
+                <% if current_customer.following?(c) %>
+                  <%= link_to "フォロー外す", public_customer_relationships_path(c.id), method: :delete %>
+                <% else %>
+                  <%= link_to "フォローする", public_customer_relationships_path(c.id), method: :post %>
+                <% end %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
