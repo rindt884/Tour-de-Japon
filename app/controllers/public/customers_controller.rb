@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
     before_action :ensure_correct_customer, only: [:edit, :update]
+    before_action :set_customer, only: [:favorites]
     # before_action :current_customer, only: [:edit, :update]
     
     def show
@@ -19,6 +20,13 @@ class Public::CustomersController < ApplicationController
       end
     end
     
+    def favorites
+      favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
+      @favorite_posts = Post.find(favorites)
+      @today = Date.today #今日の日付を取得
+      @now = Time.now     #現在時刻を取得
+    end
+    
     private
 
     def customer_params
@@ -30,6 +38,10 @@ class Public::CustomersController < ApplicationController
       unless @customer == current_customer
         redirect_to public_customer_path(current_customer)
       end
+    end
+    
+    def set_customer
+      @customer = Customer.find(params[:id])
     end
 
 end

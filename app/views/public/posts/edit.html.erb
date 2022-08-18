@@ -1,0 +1,27 @@
+<%= render 'layouts/errors', obj: @post %>
+
+<%= form_with model: [:public, @post], local:true do |f| %>
+
+  <%= f.label :image %>
+  <%= f.file_field :images, multiple: true %><br>
+
+  <%= f.label :name, "地域" %>
+  <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name,{include_blank: "---"} ) %><br>
+  
+  <%= f.label :name, "場所" %>
+  <%= f.text_field :title %><br>
+  
+  <%= f.label :name, "記録" %>
+  <%= f.text_area :body %><br>
+  
+  <%= f.label :name, "ライド日" %>
+  <%= f.date_field :rideday %><br>
+
+  <%= f.label :name, "走行距離" %>
+  <%= f.number_field :mileage, autocomplete: "off", :value =>"0" %>km<br>
+  
+  <%= f.label :name, "走行時間" %>
+  <%= f.time_select :runtime, {default: Date.today + 0.hour} %><br>
+  
+  <%= f.submit "投稿" %>
+<% end %>
