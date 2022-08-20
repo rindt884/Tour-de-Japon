@@ -9,7 +9,7 @@ class Customer < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_one_attached :profile_image
-  validates :name, length: { minimum: 2, maximum: 12 }, uniqueness: true
+  validates :name, length: { minimum: 2, maximum: 10 }, uniqueness: true
   
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy

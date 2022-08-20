@@ -1,4 +1,6 @@
-<%= form_with url: public_post_comments_path(post), scope: :comment do |f| %>
-  <%= f.text_area :comment, placeholder: "コメントをここに" %>
-  <%= f.submit "送信" %>
+<p class="mt-5">
+<%= form_with(model:[:public, post, comment], local: false) do |f| %>
+  <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに", class: "w-100 form-control" %>
+  <%= f.submit "送信", class: "btn btn-outline-secondary" %>
 <% end %>
+</p>

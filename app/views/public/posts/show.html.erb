@@ -1,20 +1,41 @@
-<%= image_tag @post.customer.get_profile_image(50,50) %>
-<%= link_to @post.customer.name, public_customer_path(@post.customer.id) %><br>
-<% if @post.images.attached? %>
-  <% @post.images.each do |image| %>
-    <%= image_tag image.variant(resize: '300x300') %>
-  <% end %>
-<% end %><br>
-<div id="favorite_btn_<%= @post.id %>"><%= render "public/favorites/favorite", post: @post %></div><br>
-<%= @post.prefecture.name %>
-<%= @post.title %><br>
-<%= @post.body %><br>
-<%= @post.rideday %><br>
-<%= @post.mileage %>km<br>
-<%= @post.runtime.strftime("%H:%M") %><br>
-<div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
-<div class="new-comment"><%= render "public/comments/form", post: @post, comment: @comment %></div>
+<div class="card-list-container py-5">
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <% if @post.images.attached? %>
+      <% @post.images.each do |image| %>
+        <%= image_tag image, class:"card-img-top"; %>
+      <% end %>
+    <% end %><br>
 
-<% if @post.customer_id == current_customer.id %>
-  <td><%= link_to '編集', edit_public_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></td>
-<% end %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <%= image_tag @post.customer.get_profile_image(50,50), class:"mt-3 rounded-circle"; %>
+          <%= link_to @post.customer.name, public_customer_path(@post.customer.id), class: "nav-link text-dark" %>
+          <p class="card-title">
+            <div id="favorite_btn_<%= @post.id %>"><%= render "public/favorites/favorite", post: @post %></div>
+            <h5 class="col-sm"><%= @post.prefecture.name %>
+            <%= @post.title %></h5>
+          </p>
+          <p>
+            <%= simple_format(@post.body) %><br>
+          </p>
+          <p>
+            <%= @post.rideday %><br>
+            <%= @post.mileage %>km
+            <%= @post.runtime.strftime("%H:%M") %>
+          </p>
+          <div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
+          <div class="new-comment"><%= render "public/comments/form", post: @post, comment: @comment %></div>
+          <p class="mt-5">
+          <div class="text-right">
+          <% if @post.customer_id == current_customer.id %>
+            <td><%= link_to '編集', edit_public_post_path(@post), class: "btn btn-outline-success edit_book_#{@post.id}" %></td>
+            <td><%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-outline-danger" %></td>
+          <% end %>
+          </div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

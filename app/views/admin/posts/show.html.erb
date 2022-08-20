@@ -1,0 +1,16 @@
+<%= image_tag @post.customer.get_profile_image(50,50) %>
+<%= link_to @post.customer.name, public_customer_path(@post.customer.id) %><br>
+<% if @post.images.attached? %>
+  <% @post.images.each do |image| %>
+    <%= image_tag image %>
+  <% end %>
+<% end %><br>
+<%= @post.prefecture.name %>
+<%= @post.title %><br>
+<%= @post.body %><br>
+<%= @post.rideday %><br>
+<%= @post.mileage %>km<br>
+<%= @post.runtime.strftime("%H:%M") %><br>
+<div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
+
+<td><%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
