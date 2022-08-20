@@ -19,4 +19,12 @@ class Prefecture < ActiveHash::Base
       {id: 46, name: '鹿児島県'}, {id: 47, name: '沖縄県'}
   ]
 
+  # @prefectures = Prefecture.data
+  
+  # @prefectures.data.each |prefecture| do
+  #   f.select
+  #   link_to path do
+  #     prefecture.name
+  #   end
+  # end
 end

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   }
   
   namespace :public do
+    get "home/about" => "homes#about"
+    get "home/index" => "homes#index"
     resources :customers,only:[:show, :edit, :update]do
       resource :relationships, only: [:create, :destroy]
       member do
@@ -26,6 +28,12 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only:[:create, :destroy]
     end
+    resources :hashtags, only: [:index, :show]
+  end
+  
+  namespace :admin do
+    resources :customers, only:[:index, :show, :destroy]
+    resources :posts, only:[:index, :show, :destroy]
   end
 
 end

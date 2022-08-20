@@ -5,6 +5,9 @@ class Public::CustomersController < ApplicationController
     
     def show
       @customer = Customer.find(params[:id])
+      @posts = Post.where(customer_id: [current_customer.id]).order(created_at: :desc).page(params[:page])
+      @today = Date.today #今日の日付を取得
+      @now = Time.now     #現在時刻を取得
     end
     
     def edit
@@ -22,7 +25,8 @@ class Public::CustomersController < ApplicationController
     
     def favorites
       favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
-      @favorite_posts = Post.find(favorites)
+      @posts = Post.find(favorites)
+      @posts = Post.order(created_at: :desc).page(params[:page])
       @today = Date.today #今日の日付を取得
       @now = Time.now     #現在時刻を取得
     end
