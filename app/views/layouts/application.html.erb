@@ -14,7 +14,7 @@
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand p-3" href="/"><%= image_tag('cycle.png') %></a>
+          <a class="navbar-brand p-3" href="/public/home/about"><%= image_tag('cycle.png') %></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,48 +26,51 @@
                   <%= link_to "アバウト", public_home_about_path, class: 'nav-link text-dark' %>
                 </li>
               <% elsif customer_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to public_home_about_path, class: 'nav-link text-dark', method: :get do %>
-                    <i class="fas fa-home"></i>
+                <li class="nav-item mx-2">
+                  <%= link_to root_path, class: 'nav-link text-dark', method: :get do %>
+                    <h3><i class="fas fa-home"></i></h3>
                   <% end %>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                   <%= link_to  public_posts_path, class: 'nav-link text-dark', method: :get do %>
-                    <i class="fas fa-bicycle"></i>
+                    <h3><i class="fas fa-bicycle"></i></h3>
                   <% end %>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                   <%= link_to favorites_public_customer_path(current_customer), class: 'nav-link text-dark', method: :get do %>
-                    <i class="fas fa-heart"></i>
+                    <h3><i class="fas fa-heart"></i></h3>
                   <% end %>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                   <%= link_to new_public_post_path, class: 'nav-link text-dark', method: :get do %>
-                    <i class="fas fa-edit"></i>
+                    <h3><i class="fas fa-edit"></i></h3>
                   <% end %>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                   <%= link_to public_customer_path(current_customer), class: 'nav-link text-dark', method: :get do %>
-                    <i class="fas fa-user"></i>
+                    <h3><i class="fas fa-user"></i></h3>
                   <% end %>
                 </li>
-                <li class="nav-item">
-                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark', method: :get do %>
-                    <i class="fas fa-sign-out-alt"></i>
+                <li class="nav-item mx-2">
+                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                    <h3><i class="fas fa-sign-out-alt"></i></h3>
                   <% end %>
                 </li>
               <% else %>
-                <li class="nav-item">
-                  <%= link_to "アバウト", public_home_about_path, class: 'nav-link text-dark' %>
+                <li class="nav-item mx-2">
+                  <%= link_to public_home_index_path, class: 'nav-link text-dark', method: :get do %>
+                    <h2><i class="fas fa-bicycle"></i></h2>
+                  <% end %>
                 </li>
-                <li class="nav-item">
-                  <%= link_to "投稿一覧", public_home_index_path, class: 'nav-link text-dark' %>
+                <li class="nav-item mx-2">
+                  <%= link_to new_customer_registration_path, class: 'nav-link text-dark', method: :get do %>
+                    <h3><i class="fas fa-user-plus"></i></h3>
+                  <% end %>
                 </li>
-                <li class="nav-item">
-                  <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %>
+                <li class="nav-item mx-2">
+                  <%= link_to new_customer_session_path, class: 'nav-link text-dark', method: :get do %>
+                    <h2><i class="fas fa-sign-in-alt"></i></h2>
+                  <% end %>
                 </li>
               <% end %>
             </ul>

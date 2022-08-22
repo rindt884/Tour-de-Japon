@@ -1,1 +1,7 @@
+<div class="text-center mt-5">
+  <%= form_with url: search_public_posts_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索", class: "btn btn-outline-dark" %>
+  <% end %>
+</div>
 <%= render "public/posts/list", posts: @posts, today: @today, now: @now %>

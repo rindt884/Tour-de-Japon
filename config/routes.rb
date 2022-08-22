@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     resources :posts,only:[:new, :index, :show, :edit, :create, :destroy, :update]do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only:[:create, :destroy]
+      collection do
+        get 'search'
+      end
     end
     resources :hashtags, only: [:index, :show]
   end

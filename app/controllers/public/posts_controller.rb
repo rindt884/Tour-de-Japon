@@ -7,7 +7,7 @@ class Public::PostsController < ApplicationController
     end
     
     def index
-      @posts = Post.all.order(created_at: :desc).page(params[:page])
+      @posts = Post.where.not(customer_id: [current_customer.id]).order(created_at: :desc).page(params[:page])
       @today = Date.today #今日の日付を取得
       @now = Time.now     #現在時刻を取得
     end
@@ -45,6 +45,18 @@ class Public::PostsController < ApplicationController
         redirect_to public_post_path(@post)
       else
         render :edit
+      end
+    end
+    
+    def search
+      if params[:keyword].present?
+        @posts = Post.where('title LIKE (?) OR body LIKE (?)', "%#{params[:keyword]}%", "%#{params[:keyword]}%").page(params[:page])
+        @keyword = params[:keyword]
+        # binding.pry
+        @today = Date.today #今日の日付を取得
+        @now = Time.now     #現在時刻を取得
+      else
+        redirect_to public_posts_path, notice: "キーワードが見つかりませんでした"
       end
     end
     
