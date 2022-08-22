@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   
-    # before_action :correct_customer, only: [:edit, :update]
+    before_action :correct_customer, only: [:edit, :update]
     
     def new
       @post = Post.new
@@ -61,6 +61,13 @@ class Public::PostsController < ApplicationController
     end
     
     private
+    
+    def correct_customer
+      @post = Post.find(params[:id])
+      unless @post.customer == current_customer
+        redirect_to public_post_path(@post)
+      end
+    end
     
     def post_params
       params.require(:post).permit(:customer_id, :title, :body, :rideday, :runtime, :mileage, :prefecture_id, :profile_image, images: [])

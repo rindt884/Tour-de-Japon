@@ -3,43 +3,43 @@
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="card-body">
-      <div class="row">
-        <div class="col-12">
+      <div class="row ml-5">
+        <div class="col-12 ml-5">
           <%= form_with model: @post, url: public_posts_path, method: :post, local: true  do |f| %>
-          <div>
-            <%= f.label :"写真", class: "col-sm-3 text-center" %>
-            <%= f.file_field :images, multiple: true %>
+            <div>
+              <%= f.label :"写真", class: "col-sm-3 text-center" %>
+              <%= f.file_field :images, multiple: true %>
+            </div>
+            <div class="mt-3">
+              <%= f.label :name, "地域", class: "col-sm-3 text-center" %>
+              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name,{include_blank: "---"} ) %>
+            </div>
+            <div class="mt-3">
+              <%= f.label :name, "場所", class: "col-sm-3 text-center" %>
+              <%= f.text_field :title %>
+            </div>
+            <div class="mt-3">
+              <%= f.label :name, "記録", class: "col-sm-3 text-center" %>
+              <%= f.text_area :body, rows:'5' %>
+            </div>
+            <div class="mt-3">
+              <%= f.label :name, "ライド日", class: "col-sm-3 text-center" %>
+              <%= f.date_field :rideday %>
+            </div>
+            <div class="mt-3">
+              <%= f.label :name, "走行距離", class: "col-sm-3 text-center" %>
+              <%= f.number_field :mileage, autocomplete: "off", :value =>"0" %>km
+            </div>
+            <div class="mt-3">
+              <%= f.label :name, "走行時間", class: "col-sm-3 text-center" %>
+              <%= f.time_select :runtime, {default: Date.today + 0.hour} %>
+            </div>
           </div>
-          <div class="mt-3">
-            <%= f.label :name, "地域", class: "col-sm-3 text-center" %>
-            <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name,{include_blank: "---"} ) %>
-          </div>
-          <div class="mt-3">
-            <%= f.label :name, "場所", class: "col-sm-3 text-center" %>
-            <%= f.text_field :title %>
-          </div>
-          <div class="mt-3">
-            <%= f.label :name, "記録", class: "col-sm-3 text-center" %>
-            <%= f.text_area :body, rows:'5' %>
-          </div>
-          <div class="mt-3">
-            <%= f.label :name, "ライド日", class: "col-sm-3 text-center" %>
-            <%= f.date_field :rideday %>
-          </div>
-          <div class="mt-3">
-            <%= f.label :name, "走行距離", class: "col-sm-3 text-center" %>
-            <%= f.number_field :mileage, autocomplete: "off", :value =>"0" %>km
-          </div>
-          <div class="mt-3">
-            <%= f.label :name, "走行時間", class: "col-sm-3 text-center" %>
-            <%= f.time_select :runtime, {default: Date.today + 0.hour} %>
-          </div>
-          <div class="text-center">
-            <%= f.submit "投稿", class: "btn btn-outline-success" %>
-          </div>
-          <% end %>
         </div>
-      </div>
+        <div class="text-center mt-3">
+          <%= f.submit "投稿", class: "btn btn-outline-success" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -23,7 +23,13 @@
             <ul class="navbar-nav ml-auto">
               <% if admin_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to "アバウト", public_home_about_path, class: 'nav-link text-dark' %>
+                  <%= link_to "投稿一覧", admin_posts_path, method: :get, class: 'nav-link text-dark'%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "会員一覧", admin_customers_path, method: :get, class: 'nav-link text-dark'%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark'%>
                 </li>
               <% elsif customer_signed_in? %>
                 <li class="nav-item mx-2">
@@ -78,6 +84,10 @@
         </div>
       </nav>
     </header>
-  <%= yield %>
-</body>
+    <%= yield %>
+  </body>
+  <footer class="bg-dark text-white pt-5 pb-4">
+    <p class="text-center">〜日本を旅しよう、日本を深く知ろう〜 <a class="text-white-50 mx-3">@Tour de Japon</a></p>
+    <!--<a href="/admin/sign_in" title="管理者ログイン" class="text-white-50">管理者</a>-->
+  </footer>
 </html>

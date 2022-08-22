@@ -1,10 +1,17 @@
-<%= image_tag @post.customer.get_profile_image(50,50) %>
-<%= link_to @post.customer.name, public_customer_path(@post.customer.id) %><br>
+<div class="card-list-container py-5">
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <div class="col-12">
+<%= image_tag @post.customer.get_profile_image(50,50), class:"mt-3 rounded-circle"; %>
+<%= link_to @post.customer.name, admin_customer_path(@post.customer.id), class: "nav-link text-dark" %><br>
+</div>
 <% if @post.images.attached? %>
   <% @post.images.each do |image| %>
     <%= image_tag image %>
   <% end %>
 <% end %><br>
+<div class="card-body">
+      <div class="row">
+        <div class="col-12">
 <%= @post.prefecture.name %>
 <%= @post.title %><br>
 <%= @post.body %><br>
@@ -14,3 +21,8 @@
 <div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
 
 <td><%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+</div>
+    </div>
+  </div>
+</div>
+</div>

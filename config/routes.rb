@@ -21,6 +21,9 @@ Rails.application.routes.draw do
       member do
           get :favorites
         end
+      collection do
+        get 'search'
+      end
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end

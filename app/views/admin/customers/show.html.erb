@@ -1,0 +1,16 @@
+<div class="card-list-container py-5">
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <%= image_tag @customer.get_profile_image(100,100), class:"rounded-circle"; %>
+          <%= @customer.name %>
+          <div id="follow_btn_<%= @customer.id %>"><%= render "public/relationships/follow", customer: @customer, class:"mt-5" %></div>
+          <p class="card-title">
+            <%= simple_format(@customer.introduction) %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

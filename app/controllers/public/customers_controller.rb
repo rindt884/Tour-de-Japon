@@ -30,6 +30,15 @@ class Public::CustomersController < ApplicationController
       @now = Time.now     #現在時刻を取得
     end
     
+    def search
+    if params[:keyword].present?
+      @customers = Customer.where('name LIKE (?)', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      redirect_to public_customer_path(@customer.id)
+    end
+    end
+    
     private
 
     def customer_params
