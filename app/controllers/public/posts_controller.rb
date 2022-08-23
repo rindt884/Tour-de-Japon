@@ -51,15 +51,17 @@ class Public::PostsController < ApplicationController
     end
     
     def search
+      @posts = Post.all
       if params[:keyword].present?
-        @posts = Post.where('title LIKE (?) OR body LIKE (?)', "%#{params[:keyword]}%", "%#{params[:keyword]}%").page(params[:page])
+        @posts = @posts.where('title LIKE (?) OR body LIKE (?)', "%#{params[:keyword]}%", "%#{params[:keyword]}%")
         @keyword = params[:keyword]
-        # binding.pry
-        @today = Date.today #今日の日付を取得
-        @now = Time.now     #現在時刻を取得
-      else
-        redirect_to public_posts_path, notice: "キーワードが見つかりませんでした"
+      # else
+        # redirect_to public_posts_path, notice: "キーワードが見つかりませんでした"
       end
+      @posts = @posts.where(prefecture_id: params[:prefecture_id])
+      # @posts = @post.page(params[:page])
+      @today = Date.today #今日の日付を取得
+      @now = Time.now     #現在時刻を取得
     end
     
     private

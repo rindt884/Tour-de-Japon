@@ -14,7 +14,7 @@
           <% if @customer == current_customer %>
         　  <%= link_to "プロフィール編集", edit_public_customer_path(@customer.id), class: "btn btn-outline-success" %>
           <% end %>
-          <div id="follow_btn_<%= @customer.id %>"><%= render "public/relationships/follow", customer: @customer, class:"mt-5" %></div>
+          <div id="follow_btn_<%= @customer.id %>"><%= render "public/relationships/follow", customer: @customer, class: "mt-5" %></div>
           <p class="card-title">
           <%= simple_format(@customer.introduction) %>
           </p>
