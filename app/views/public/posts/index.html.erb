@@ -1,9 +1,11 @@
 <div class="text-center mt-5">
   <%= form_with url: search_public_posts_path, local: true, method: :get do |f| %>
-    <%= f.text_field :keyword, placeholder: "投稿検索" %>
+    <%#= f.text_field :keyword, placeholder: "投稿検索" %>
+    <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: "---" %>
     <%= f.submit "検索", class: "btn btn-outline-dark" %>
   <% end %>
 </div>
 <div>
+  <%#= @prefectures.id %>
 </div>
 <%= render "public/posts/list", posts: @posts, today: @today, now: @now %>

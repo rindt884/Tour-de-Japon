@@ -6,7 +6,7 @@
         <% if p.images.attached? %>
           <% p.images.each do |image| %>
           <siv class="size">
-            <%= image_tag image %>
+            <%= image_tag image.variant(gravity: :center, resize:"710x640^", crop:"710x640+0+0").processed %>
             </siv>
           <% end %>
         <% end %>

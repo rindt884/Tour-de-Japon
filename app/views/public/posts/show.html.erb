@@ -1,22 +1,21 @@
+<%= render 'layouts/errors', obj: @post %>
+
 <% if flash[:notice] %>
  <div class="alert alert-success" role="alert">
  <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
 <% end %>
+
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <div class="col-12">
-      <td><%= image_tag @post.customer.get_profile_image(50,50), class:"mt-3 rounded-circle"; %></td>
-      <td><%= link_to @post.customer.name, public_customer_path(@post.customer.id), class: "nav-link text-dark" %></td>
+    <div class="col-12 row">
+      <%= image_tag @post.customer.get_profile_image(50,50), class:"mt-3 rounded-circle" %>
+      <%= link_to @post.customer.name, public_customer_path(@post.customer.id), class: "nav-link text-dark" %>
     </div>
-    <div class="slider">
       <% if @post.images.attached? %>
         <% @post.images.each do |image| %>
-          <siv class="size">
             <%= image_tag image.variant(resize: '500x500') %>
-          </siv>
         <% end %>
       <% end %>
-    </div>
     <div class="card-body">
       <div class="row">
         <div class="col-12">

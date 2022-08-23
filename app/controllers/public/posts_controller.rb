@@ -29,7 +29,7 @@ class Public::PostsController < ApplicationController
       @post = Post.new(post_params)
       @post.customer_id = current_customer.id
       if @post.save
-        redirect_to public_post_path(@post), notice: "登録完了しました！"
+        redirect_to public_post_path(@post), notice: "投稿しました！"
       else
         render :new
       end
@@ -44,7 +44,7 @@ class Public::PostsController < ApplicationController
     def update
       @post = Post.find(params[:id])
       if @post.update(post_params)
-        redirect_to public_post_path(@post)
+        redirect_to public_post_path(@post), notice: "更新しました！"
       else
         render :edit
       end
