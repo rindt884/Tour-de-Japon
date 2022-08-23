@@ -1,7 +1,11 @@
+<% if flash[:notice] %>
+ <div class="alert alert-success" role="alert">
+ <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
+<% end %>
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="col-12">
-      <td><%#= image_tag @post.customer.get_profile_image(50,50), class:"mt-3 rounded-circle"; %></td>
+      <td><%= image_tag @post.customer.get_profile_image(50,50), class:"mt-3 rounded-circle"; %></td>
       <td><%= link_to @post.customer.name, public_customer_path(@post.customer.id), class: "nav-link text-dark" %></td>
     </div>
     <div class="slider">
@@ -18,7 +22,7 @@
         <div class="col-12">
             <div id="favorite_btn_<%= @post.id %>"><%= render "public/favorites/favorite", post: @post %></div>
           <p class="card-title">
-            <h5><%= @post.prefecture.name %>
+            <h5 class="my-5"><%= @post.prefecture.name %>
             <%= @post.title %></h5>
           </p>
           <p>
@@ -29,6 +33,17 @@
             <%= @post.mileage %>km
             <%= @post.runtime.strftime("%H:%M") %>
           </p>
+          <div class="text-right">
+            <% if (@now - @post.created_at) <= 60 * 60 %>
+              <%=((@now - @post.created_at) / 60).to_i.to_s + "分前" %>
+            <% elsif (@now - @post.created_at) <= 60 * 60 * 24 %>
+            　<%=((@now - @post.created_at) / 3600).to_i.to_s + "時間前" %>
+            <% elsif (@today - @post.created_at.to_date) <= 30 %>
+            　<%= (@today - @post.created_at.to_date).to_i.to_s + "日前" %>
+            <% else %>
+              <%= @post.created_at.strftime('%Y-%m-%d') %> 
+            <% end %>
+          </div>
           <div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
           <div class="new-comment"><%= render "public/comments/form", post: @post, comment: @comment %></div>
           <p class="mt-5">
@@ -37,7 +52,6 @@
             <%= link_to edit_public_post_path(@post), class: "btn" do %>
               <h4><i class="far fa-edit text-success"></i></h4>
             <% end %>
-            
             <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn" do %>
               <h4><i class="far fa-trash-alt text-danger"></i></h4>
             <% end %>

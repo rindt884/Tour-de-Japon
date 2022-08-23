@@ -2,8 +2,23 @@
 
 class Public::SessionsController < Devise::SessionsController
   
-  # before_action :customer_state, only: [:create]
+  protected
 
+  # 会員の論理削除のための記述。退会後は、同じアカウントでは利用できない。
+  def customer_state
+    @customer = Customer.find_by(email: params[:customer][:email].downcase)
+    if @customer
+     if @customer.valid_password?(params[:customer][:password]) && (@customer.deleted_user == true)
+      flash[:error] = "退会済みです。再度ご登録をしてご利用ください。"
+      redirect_to root_path
+     else
+      flash[:error] = "必須項目を入力してください。"
+     end
+    end
+  end
+  
+  # before_action :customer_state, only: [:create]
+  
   # def after_sign_in_path_for(resource)
   #   root_path
   # end

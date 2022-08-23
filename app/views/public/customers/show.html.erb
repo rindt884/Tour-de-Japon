@@ -9,8 +9,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-12">
-          <%#= @customer.profile_image.attached? %>
-          <%#= image_tag @customer.get_profile_image(100,100), class:"rounded-circle" %>
+          <%= image_tag @customer.get_profile_image(100,100), class:"rounded-circle" %>
           <%= @customer.name %>
           <% if @customer == current_customer %>
         　  <%= link_to "プロフィール編集", edit_public_customer_path(@customer.id), class: "btn btn-outline-success" %>

@@ -10,9 +10,6 @@ class Public::PostsController < ApplicationController
       @posts = Post.where.not(customer_id: [current_customer.id]).order(created_at: :desc).page(params[:page])
       @today = Date.today #今日の日付を取得
       @now = Time.now     #現在時刻を取得
-      # @q = Post.ransack(params[:q])
-      # @posts = @q.result(distinct: true)
-      # @post_prefecture_id = Prefecture.all
     end
     
     def show
@@ -20,6 +17,8 @@ class Public::PostsController < ApplicationController
       @customer = current_customer
       @comment = Comment.new
       @comments = Comment.all
+      @today = Date.today #今日の日付を取得
+      @now = Time.now     #現在時刻を取得
     end
     
     def edit
@@ -30,7 +29,7 @@ class Public::PostsController < ApplicationController
       @post = Post.new(post_params)
       @post.customer_id = current_customer.id
       if @post.save
-        redirect_to public_post_path(@post)
+        redirect_to public_post_path(@post), notice: "登録完了しました！"
       else
         render :new
       end

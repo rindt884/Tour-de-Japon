@@ -31,12 +31,23 @@ class Public::CustomersController < ApplicationController
     end
     
     def search
-    if params[:keyword].present?
-      @customers = Customer.where('name LIKE (?)', "%#{params[:keyword]}%")
-      @keyword = params[:keyword]
-    else
-      redirect_to public_customer_path(@customer.id)
+      if params[:keyword].present?
+        @customers = Customer.where('name LIKE (?)', "%#{params[:keyword]}%")
+        @keyword = params[:keyword]
+      else
+        redirect_to public_customer_path(@customer.id)
+      end
     end
+    
+    def unsubscribe
+    end
+    
+    def withdrawal
+      @customer = Customer.find(params[:id])
+      @customer.update(is_deleted: true) # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+      reset_session
+      flash[:notice] = "退会処理を実行いたしました"
+      redirect_to root_path
     end
     
     private
