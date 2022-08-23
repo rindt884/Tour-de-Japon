@@ -76,4 +76,6 @@ Rails.application.configure do
   
   config.hosts << "b52740129020413f9f4916ae0a4a3893.vfs.cloud9.us-west-2.amazonaws.com"
   
+  config.autoloader = :classic
+  
 end

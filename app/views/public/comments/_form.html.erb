@@ -1,6 +1,6 @@
 <p class="mt-5">
 <%= form_with(model:[:public, post, comment], local: false) do |f| %>
   <%= f.text_area :comment, rows:'3', placeholder: "コメントをここに", class: "w-100 form-control" %>
-  <%= f.submit "送信", class: "btn btn-outline-secondary" %>
+  <%= f.submit "送信", class: "btn btn-outline-secondary mt-2" %>
 <% end %>
 </p>

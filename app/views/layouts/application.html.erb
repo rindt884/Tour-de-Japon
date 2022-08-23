@@ -8,6 +8,8 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   </head>
 
   <body class="d-flex flex-column vh-100">
@@ -85,9 +87,9 @@
       </nav>
     </header>
     <%= yield %>
+    <footer class="bg-dark text-white pt-5 pb-4">
+      <p class="text-center">〜日本を旅しよう、日本を深く知ろう〜 <a class="text-white-50 mx-3">@Tour de Japon</a></p>
+      <!--<a href="/admin/sign_in" title="管理者ログイン" class="text-white-50">管理者</a>-->
+    </footer>
   </body>
-  <footer class="bg-dark text-white pt-5 pb-4">
-    <p class="text-center">〜日本を旅しよう、日本を深く知ろう〜 <a class="text-white-50 mx-3">@Tour de Japon</a></p>
-    <!--<a href="/admin/sign_in" title="管理者ログイン" class="text-white-50">管理者</a>-->
-  </footer>
 </html>

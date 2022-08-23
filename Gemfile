@@ -63,10 +63,13 @@ gem 'devise'
 
 gem 'jquery-rails'
 
+gem 'mini_magick'
+
+
 
 gem 'kaminari','~> 1.2.1'
 
-gem "net-smtp"
+# gem "net-smtp"
 
 gem 'dotenv-rails'
 group :production do

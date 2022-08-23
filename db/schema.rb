@@ -81,19 +81,6 @@ ActiveRecord::Schema.define(version: 2022_08_08_112316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "hashtags", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "post_hashtags", force: :cascade do |t|
-    t.integer "hashtag_id", null: false
-    t.integer "post_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "title", null: false
