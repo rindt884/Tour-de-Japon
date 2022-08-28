@@ -1,18 +1,25 @@
 <div class="card-list-container py-5">
-  <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <div class="card-body">
-      <div class="text-center">
-        <% if customers.exists? %>
-          <% customers.each do |c| %>
-            <td><%= image_tag c.get_profile_image(50,50), class:"rounded-circle"; %></td>
-            <td><%= link_to c.name, public_customer_path(c) %></td>
-            <td>フォロー数: <%= c.followings.count %></td>
-            <td>フォロワー数: <%= c.followers.count %></td>
-          <% end %>
-        <% else %>
-          <p>ユーザーはいません</p>
-        <% end %>
+  <% if customers.exists? %>
+    <% customers.each do |c| %>
+      <div class="card w-50 mx-auto mt-4 shadow-lg">
+        <div class="card-body">
+          <div class="text-center">
+            <%= link_to public_customer_path(c), class: "nav-link text-dark" do %>
+            <%= image_tag c.get_profile_image(50,50), class: "rounded-circle mr-2" %>
+            <%= c.name %>
+            フォロー数：<%= c.followings.count %>　
+            フォロワー数：<%= c.followers.count %>　
+            投稿数：<%= c.posts.count %>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
+    <% else %>
+    <p>ユーザーはいません</p>
+    <% end %>
   </div>
+  
+<div class="page-view">
+  <%= paginate customers %>
 </div>

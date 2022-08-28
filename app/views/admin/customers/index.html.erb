@@ -7,21 +7,24 @@
             <th>会員ID</th>
             <th>氏名</th>
             <th>メールアドレス</th>
-            <th colspan="3"></th>
+            <th>会員ステータス</th>
           </tr>
         </thead>
         <tbody>
           <% @customers.each do |c| %>
             <tr>
               <td><%= c.id %></td>
-              <td>
-                <%= link_to c.name, admin_customer_path(c.id) %>
-              </td>
+              <td><%= link_to c.name, admin_customer_path(c.id) %></td>
               <td><%= c.email %></td>
+              <td><%= c.is_deleted ? '退会' : '有効' %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
+</div>
+
+<div class="page-view">
+  <%= paginate @customers %>
 </div>

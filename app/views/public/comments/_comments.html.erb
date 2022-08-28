@@ -7,9 +7,9 @@
       <td><%= comment.comment %></td>
       <td>
         <% if comment.customer == current_customer %>
-          <%= link_to "削除", public_post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn btn-outline-danger p-0 p-1", style: "font-size: 8px;" %>
+          <%= link_to "削除", public_post_comment_path(comment.post,comment), method: :delete, remote: true, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-outline-danger p-0 p-1", style: "font-size: 8px;" %>
         <% elsif post.customer == current_customer %>
-          <%= link_to "削除", public_post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn btn-outline-danger p-0 p-1", style: "font-size: 8px;" %>
+          <%= link_to "削除", public_post_comment_path(comment.post,comment), method: :delete, remote: true, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-outline-danger p-0 p-1", style: "font-size: 8px;" %>
         <% end %>
       </td>
     </tr>

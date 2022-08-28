@@ -1,3 +1,8 @@
+<% if flash[:error] %>
+ <div class="alert alert-danger" role="alert">
+ <p class="notice text-center" style="color:red;"><%= flash[:error] %></p></div>
+<% end %>
+
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="card-body">
@@ -6,6 +11,8 @@
         <h2 class="text-info">Log in</h2>
         
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "public/shared/error_messages", resource: resource %>
+        
           <div class="field mt-5">
             <%= f.label :メールアドレス, class: "text-secondary" %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

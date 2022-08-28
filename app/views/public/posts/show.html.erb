@@ -8,7 +8,7 @@
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="col-12 row">
-      <%= image_tag @post.customer.get_profile_image(75,75), class: "ml-2 rounded-circle" %>
+      <%= image_tag @post.customer.get_profile_image(75,75), class: "p-2 rounded-circle" %>
       <%= link_to @post.customer.name, public_customer_path(@post.customer.id), class: "text-dark mt-4" %>
     </div>
       <% if @post.images.attached? %>
@@ -48,10 +48,10 @@
           <p class="mt-5">
           <div class="text-right">
           <% if @post.customer_id == current_customer.id %>
-            <%= link_to edit_public_post_path(@post), class: "btn" do %>
+            <%= link_to edit_public_post_path(@post), class: "btn",  data: {"turbolinks" => false} do %>
               <h4><i class="far fa-edit text-success"></i></h4>
             <% end %>
-            <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn" do %>
+            <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn" do %>
               <h4><i class="far fa-trash-alt text-danger"></i></h4>
             <% end %>
           <% end %>

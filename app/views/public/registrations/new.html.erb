@@ -1,3 +1,8 @@
+<% if flash[:error] %>
+ <div class="alert alert-success" role="alert">
+ <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
+<% end %>
+
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="card-body">
@@ -5,7 +10,7 @@
         <h2 class="text-info">Sign up</h2>
         
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render "public/shared/error_messages", resource: resource %>
+          <%#= render "public/shared/error_messages", resource: resource %>
           
           <div class="field mt-5">
             <%= f.label :ニックネーム, class: "text-secondary" %><br />

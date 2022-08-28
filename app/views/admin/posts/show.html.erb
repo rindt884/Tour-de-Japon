@@ -1,28 +1,53 @@
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <div class="col-12">
-<%= image_tag @post.customer.get_profile_image(50,50), class:"mt-3 rounded-circle"; %>
-<%= link_to @post.customer.name, admin_customer_path(@post.customer.id), class: "nav-link text-dark" %><br>
-</div>
-<% if @post.images.attached? %>
-  <% @post.images.each do |image| %>
-    <%= image_tag image %>
-  <% end %>
-<% end %><br>
-<div class="card-body">
+    <div class="col-12 row">
+      <%= image_tag @post.customer.get_profile_image(75,75), class: "p-2 rounded-circle" %>
+      <%= link_to @post.customer.name, admin_customer_path(@post.customer.id), class: "text-dark mt-4" %>
+    </div>
+      <% if @post.images.attached? %>
+        <% @post.images.each do |image| %>
+            <%= image_tag image.variant(resize: '500x500') %>
+        <% end %>
+      <% end %>
+    <div class="card-body">
       <div class="row">
         <div class="col-12">
-<%= @post.prefecture.name %>
-<%= @post.title %><br>
-<%= @post.body %><br>
-<%= @post.rideday %><br>
-<%= @post.mileage %>km<br>
-<%= @post.runtime.strftime("%H:%M") %><br>
-<div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
-
-<td><%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-</div>
+          <p class="card-title">
+            <h5 class="my-5"><%= @post.prefecture.name %>
+            <%= @post.title %></h5>
+          </p>
+          <p>
+            <%= simple_format(@post.body) %><br>
+          </p>
+          <p>
+            <%= @post.rideday %><br>
+            <%= @post.mileage %>km
+            <%= @post.runtime.strftime("%H:%M") %>
+          </p>
+          <div class="text-right">
+            <% if (@now - @post.created_at) <= 60 * 60 %>
+              <%=((@now - @post.created_at) / 60).to_i.to_s + "分前" %>
+            <% elsif (@now - @post.created_at) <= 60 * 60 * 24 %>
+            　<%=((@now - @post.created_at) / 3600).to_i.to_s + "時間前" %>
+            <% elsif (@today - @post.created_at.to_date) <= 30 %>
+            　<%= (@today - @post.created_at.to_date).to_i.to_s + "日前" %>
+            <% else %>
+              <%= @post.created_at.strftime('%Y-%m-%d') %> 
+            <% end %>
+          </div>
+          <div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
+          <p class="mt-5">
+          <div class="text-right">
+            <%= link_to edit_admin_post_path(@post), class: "btn" do %>
+              <h4><i class="far fa-edit text-success"></i></h4>
+            <% end %>
+            <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn" do %>
+              <h4><i class="far fa-trash-alt text-danger"></i></h4>
+            <% end %>
+          </div>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </div>

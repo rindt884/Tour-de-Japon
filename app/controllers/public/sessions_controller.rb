@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+    
+  before_action :customer_state, only: [:create]
   
   protected
 
@@ -8,9 +10,9 @@ class Public::SessionsController < Devise::SessionsController
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email].downcase)
     if @customer
-     if @customer.valid_password?(params[:customer][:password]) && (@customer.deleted_user == true)
+     if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
       flash[:error] = "退会済みです。再度ご登録をしてご利用ください。"
-      redirect_to root_path
+      redirect_to new_customer_session_path
      else
       flash[:error] = "必須項目を入力してください。"
      end

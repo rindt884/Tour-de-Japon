@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
   
+    before_action :authenticate_customer!
     before_action :correct_customer, only: [:edit, :update]
     
     def new
@@ -7,7 +8,7 @@ class Public::PostsController < ApplicationController
     end
     
     def index
-      @posts = Post.where.not(customer_id: [current_customer.id]).order(created_at: :desc).page(params[:page])
+      @posts = Post.where.not(customer_id: [current_customer.id]).order(created_at: :desc).page(params[:page]).per(3)
       @today = Date.today #今日の日付を取得
       @now = Time.now     #現在時刻を取得
     end
@@ -29,7 +30,8 @@ class Public::PostsController < ApplicationController
       @post = Post.new(post_params)
       @post.customer_id = current_customer.id
       if @post.save
-        redirect_to public_post_path(@post), notice: "投稿しました！"
+        flash[:notice] = "投稿しました！"
+        redirect_to public_post_path(@post)
       else
         render :new
       end
@@ -38,13 +40,15 @@ class Public::PostsController < ApplicationController
     def destroy
       @post = Post.find(params[:id])
       @post.destroy
+      flash[:alert] = "削除しました"
       redirect_to public_posts_path
     end
     
     def update
       @post = Post.find(params[:id])
       if @post.update(post_params)
-        redirect_to public_post_path(@post), notice: "更新しました！"
+        flash[:notice] = "更新しました！"
+        redirect_to public_post_path(@post)
       else
         render :edit
       end
@@ -55,11 +59,10 @@ class Public::PostsController < ApplicationController
       if params[:keyword].present?
         @posts = @posts.where('title LIKE (?) OR body LIKE (?)', "%#{params[:keyword]}%", "%#{params[:keyword]}%")
         @keyword = params[:keyword]
-      # else
-        # redirect_to public_posts_path, notice: "キーワードが見つかりませんでした"
+      else
+        @posts = @posts.where(prefecture_id: params[:prefecture_id])
       end
-      @posts = @posts.where(prefecture_id: params[:prefecture_id])
-      # @posts = @post.page(params[:page])
+      @posts = @posts.order(created_at: :desc).page(params[:page])
       @today = Date.today #今日の日付を取得
       @now = Time.now     #現在時刻を取得
     end

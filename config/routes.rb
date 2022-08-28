@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       member do
           get :favorites
-        end
+      end
       collection do
         get 'search' # ユーザー検索
       end
@@ -37,12 +37,11 @@ Rails.application.routes.draw do
         get 'search' # 投稿検索
       end
     end
-    resources :hashtags, only: [:index, :show]
   end
   
   namespace :admin do
-    resources :customers, only:[:index, :show, :destroy]
-    resources :posts, only:[:index, :show, :destroy]
+    resources :customers, only:[:index, :show, :edit, :update, :destroy]
+    resources :posts, only:[:index, :show, :edit, :update, :destroy]
   end
 
 end

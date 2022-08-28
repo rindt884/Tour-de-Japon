@@ -1,4 +1,6 @@
 class Public::CustomersController < ApplicationController
+  
+    before_action :authenticate_customer!
     before_action :ensure_correct_customer, only: [:edit, :update]
     before_action :set_customer, only: [:favorites]
     # before_action :current_customer, only: [:edit, :update]
@@ -17,6 +19,7 @@ class Public::CustomersController < ApplicationController
     def update
       @customer = Customer.find(params[:id])
       if @customer.update(customer_params)
+        flash[:notice] = "編集しました。"
         redirect_to public_customer_path(current_customer)
       else
         render "edit"
@@ -35,7 +38,8 @@ class Public::CustomersController < ApplicationController
         @customers = Customer.where('name LIKE (?)', "%#{params[:keyword]}%")
         @keyword = params[:keyword]
       else
-        redirect_to public_customer_path(@customer.id)
+        @customers = Customer.none
+        # @customers = @customers.order(created_at: :desc).page(params[:page])
       end
     end
     
