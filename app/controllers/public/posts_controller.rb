@@ -8,7 +8,7 @@ class Public::PostsController < ApplicationController
     end
     
     def index
-      @posts = Post.where.not(customer_id: [current_customer.id]).order(created_at: :desc).page(params[:page]).per(3)
+      @posts = Post.where.not(customer_id: [current_customer.id]).order(created_at: :desc).page(params[:page])
       @today = Date.today #今日の日付を取得
       @now = Time.now     #現在時刻を取得
     end
