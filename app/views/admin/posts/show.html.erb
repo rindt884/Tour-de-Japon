@@ -38,10 +38,10 @@
           <div id="comments_area"><%= render "public/comments/comments", post: @post %></div>
           <p class="mt-5">
           <div class="text-right">
-            <%= link_to edit_admin_post_path(@post), class: "btn" do %>
+            <%= link_to edit_admin_post_path(@post), class: "btn", data: {"turbolinks" => false} do %>
               <h4><i class="far fa-edit text-success"></i></h4>
             <% end %>
-            <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn" do %>
+            <%= link_to admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn" do %>
               <h4><i class="far fa-trash-alt text-danger"></i></h4>
             <% end %>
           </div>

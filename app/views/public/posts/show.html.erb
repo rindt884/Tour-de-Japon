@@ -48,7 +48,7 @@
           <p class="mt-5">
           <div class="text-right">
           <% if @post.customer_id == current_customer.id %>
-            <%= link_to edit_public_post_path(@post), class: "btn",data: {"turbolinks" => false} do %>
+            <%= link_to edit_public_post_path(@post), class: "btn", data: {"turbolinks" => false} do %>
               <h4><i class="far fa-edit text-success"></i></h4>
             <% end %>
             <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn" do %>
