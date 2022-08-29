@@ -23,6 +23,15 @@ class Admin::CustomersController < ApplicationController
     end
   end
   
+  def search
+    if params[:keyword].present?
+      @customers = Customer.where('id LIKE (?)', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @customers = Customer.none
+    end
+  end
+  
   private
   
   def customer_params

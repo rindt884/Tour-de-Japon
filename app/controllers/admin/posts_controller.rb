@@ -32,6 +32,16 @@ class Admin::PostsController < ApplicationController
     end
   end
   
+  def search
+    @posts = Post.all
+    if params[:keyword].present?
+      @posts = @posts.where('id LIKE (?)', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+    @posts = @posts.order(created_at: :desc)
+    end
+  end
+  
   private
   
   def post_params
