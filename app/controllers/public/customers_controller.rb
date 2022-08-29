@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
   
     before_action :authenticate_customer!
-    before_action :ensure_correct_customer, only: [:edit, :update]
+    before_action :ensure_correct_customer, only: [:edit, :update, :favorites, :unsubscribe, :withdrawal]
     before_action :set_customer, only: [:favorites]
 
     def show
@@ -49,7 +49,7 @@ class Public::CustomersController < ApplicationController
       @customer.update(is_deleted: true) # is_deletedカラムをtrueに変更することにより削除フラグを立てる
       reset_session
       flash[:notice] = "退会処理を実行いたしました"
-      redirect_to root_path
+      redirect_to new_customer_registration_path
     end
     
     private

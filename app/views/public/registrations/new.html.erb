@@ -3,6 +3,11 @@
  <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
 <% end %>
 
+<% if flash[:notice] %>
+ <div class="alert alert-danger" role="alert">
+ <p class="notice text-center" style="color:red;"><%= flash[:notice] %></p></div>
+<% end %>
+
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="card-body">
