@@ -3,8 +3,7 @@ class Public::CustomersController < ApplicationController
     before_action :authenticate_customer!
     before_action :ensure_correct_customer, only: [:edit, :update]
     before_action :set_customer, only: [:favorites]
-    # before_action :current_customer, only: [:edit, :update]
-    
+
     def show
       @customer = Customer.find(params[:id])
       @posts = Post.where(customer_id: [@customer.id]).order(created_at: :desc).page(params[:page])
@@ -39,7 +38,6 @@ class Public::CustomersController < ApplicationController
         @keyword = params[:keyword]
       else
         @customers = Customer.none
-        # @customers = @customers.order(created_at: :desc).page(params[:page])
       end
     end
     

@@ -40,8 +40,16 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    resources :customers, only:[:index, :show, :edit, :update, :destroy]
-    resources :posts, only:[:index, :show, :edit, :update, :destroy]
+    resources :customers, only:[:index, :show, :edit, :update, :destroy] do
+      collection do
+        get 'search' # 会員検索
+      end
+    end
+    resources :posts, only:[:index, :show, :edit, :update, :destroy] do
+      collection do
+        get 'search' # 投稿検索
+      end
+    end
   end
 
 end

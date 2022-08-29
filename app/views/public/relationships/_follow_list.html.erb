@@ -5,11 +5,11 @@
         <div class="card-body">
           <div class="text-center">
             <%= link_to public_customer_path(c), class: "nav-link text-dark" do %>
-            <%= image_tag c.get_profile_image(50,50), class: "rounded-circle mr-2" %>
-            <%= c.name %>
-            フォロー数：<%= c.followings.count %>　
-            フォロワー数：<%= c.followers.count %>　
-            投稿数：<%= c.posts.count %>
+              <%= image_tag c.get_profile_image(50,50), class: "rounded-circle mr-2" %>
+              <%= c.name %>　　
+              フォロー数：<%= c.followings.count %>　
+              フォロワー数：<%= c.followers.count %>　
+              投稿数：<%= c.posts.count %>
             <% end %>
           </div>
         </div>
