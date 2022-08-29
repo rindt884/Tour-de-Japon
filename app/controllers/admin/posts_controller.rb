@@ -38,7 +38,7 @@ class Admin::PostsController < ApplicationController
       @posts = @posts.where('id LIKE (?)', "%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
-    @posts = @posts.order(created_at: :desc)
+    @posts = @posts.all
     end
   end
   
