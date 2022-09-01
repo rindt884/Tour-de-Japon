@@ -12,7 +12,6 @@ class Public::CommentsController < ApplicationController
     Comment.find_by(id: params[:id]).destroy
     @post = Post.find(params[:post_id])
     render :comments
-    # redirect_to public_post_path(params[:post_id])
   end
   
   private
