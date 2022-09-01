@@ -6,7 +6,6 @@ class Public::CommentsController < ApplicationController
     comment.post_id = @post.id
     comment.save
     render :comments
-    # redirect_to public_post_path(@post)
   end
 
   def destroy
