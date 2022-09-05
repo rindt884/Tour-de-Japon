@@ -1,8 +1,7 @@
 class Public::PostsController < ApplicationController
   
     before_action :authenticate_customer!
-    before_action :correct_customer, only: [:edit, :update, :destroy, :create
-    ]
+    before_action :correct_customer, only: [:edit, :update, :destroy]
     
     def new
       @post = Post.new
