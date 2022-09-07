@@ -13,7 +13,7 @@ class Public::HomesController < ApplicationController
     end
     
     def index
-      @posts = Post.all.order(created_at: :desc).page(params[:page])
+      @posts = Post.all.order(created_at: :desc).page(params[:page]) #２０ページ刻み
       @today = Date.today #今日の日付を取得
       @now = Time.now     #現在時刻を取得
     end
