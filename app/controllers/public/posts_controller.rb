@@ -64,7 +64,7 @@ class Public::PostsController < ApplicationController
       end
       @posts = @posts.order(created_at: :desc).page(params[:page])
       @today = Date.today #今日の日付を取得
-      @now = Time.now     #現在時刻を取得
+      @now = Time.now
     end
     
     private
