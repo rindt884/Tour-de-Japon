@@ -63,7 +63,7 @@ class Public::PostsController < ApplicationController
         @posts = @posts.where(prefecture_id: params[:prefecture_id])
       end
       @posts = @posts.order(created_at: :desc).page(params[:page])
-      @today = Date.today #今日の日付を取得
+      @today = Date.today
       @now = Time.now
     end
     
