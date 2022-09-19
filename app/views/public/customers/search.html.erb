@@ -1,6 +1,7 @@
 <% if @customers.count == 0 %>
  <h5 class="text-center list-group-item-info mb-5">検索結果がありませんでした</h5>
 <% end %>
+
 <div class="card-list-container py-5">
   <% @customers.each do |c| %>
     <div class="card w-50 mx-auto mt-4 shadow-lg">
